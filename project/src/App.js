@@ -33,5 +33,20 @@ function App() {
       throw new Error(err);
     }
   };
+  const handleFilterUsers = (val) => {
+    const filtered = users.userData.filter((a) => {
+      return (
+        a.firstName.toLowerCase().includes(val) || 
+        a.lastName.toLowerCase().includes(val) ||
+        a.email.toLowerCase().includes(val) ||
+        ("" + a.phone).includes(val) ||
+        ("" + a.age).includes(val)
+      );
+    });
+    setFilteredUsers({userData: filtered});
+  };
+   const handleSort = (key) => {
+     
+   }
 }
 export default App;
