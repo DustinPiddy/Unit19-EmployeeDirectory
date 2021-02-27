@@ -46,7 +46,22 @@ function App() {
     setFilteredUsers({userData: filtered});
   };
    const handleSort = (key) => {
-     
-   }
+     const sorted = filteredUsers.userData.sort((a, b) => {
+       if (a[key] < b[key]) return -1 * sortDirection;
+       if (b[key] > b[key]) return 1 * sortDirection;
+       return 0;
+     });
+     setFilteredUsers({userData: sorted});
+     setSortDirection( -sortDirection);
+   };
+   return (
+     <>
+     <h1 style={{textAlign: 'center'}} className="bg-light p-5">
+       Welcome!
+      
+     </h1>
+
+     </>
+   )
 }
 export default App;
