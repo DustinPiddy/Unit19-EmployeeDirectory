@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import { getRandomUsers } from "./API";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const [users, setUsers] = useState({ userData: [] });
+  const [filteredUsers, setFilteredUsers] = useState({ userData: [] });
+  const [sortDirection, setSortDirection] = useState(1);
 
+  useEffect(() => {
+    getAndSetUsers(20);
+  }, []);
+  const getAndSetUsers = async (count) => {
+    try {
+      const {
+        data: { results },
+      } = await getRandomUsers(count);
+      //flattens data
+      const userData = results.map((user) => {
+        return {
+          firstName: user.name.first,
+          lastName: user.name.last,
+          phone: user.phone,
+          age: user.dob.age,
+          email: user.email,
+          picture: user.picture.thumbnail,
+        };
+      });
+      setUsers({ userData });
+      setFilteredUsers({ userData });
+    } catch (err) {
+      //handles API call errors
+      throw new Error(err);
+    }
+  };
+}
 export default App;
