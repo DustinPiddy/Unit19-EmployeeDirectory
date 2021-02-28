@@ -1,3 +1,7 @@
 button {
-  width: 200px;
+  width: 300px;
+}
+
+header {
+  background-color: lightblue;
 }
