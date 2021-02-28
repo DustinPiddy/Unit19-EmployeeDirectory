@@ -87,7 +87,7 @@ function App() {
      <table className="table-primary mt-2" style={{width: "70%", marginLeft: "15%"}}>
        <thread>
          <tr>
-           <th scope="col"></th>
+           <th scope="col" className="primary">Sort by</th>
             <th onClick={()=> handleSort("firstName")}>
               First
             </th>
